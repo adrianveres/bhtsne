@@ -204,7 +204,7 @@ def run_bh_tsne(data, no_dims=2, perplexity=50, theta=0.5, randseed=-1, verbose=
     # Load data in forked process to free memory for actual bh_tsne calculation
     child_pid = os.fork()
     if child_pid == 0:
-        if isinstance(data, file):
+        if not isinstance(data, np.ndarray):
             data = load_data(data)
         init_bh_tsne(data, tmp_dir_path, no_dims=no_dims, perplexity=perplexity, theta=theta, randseed=randseed,verbose=verbose, initial_dims=initial_dims, use_pca=use_pca, max_iter=max_iter)
         sys.exit(0)
