@@ -151,7 +151,7 @@ def bh_tsne(workdir, verbose=False):
 
     # Call bh_tsne and let it do its thing
     with open(devnull, 'w') as dev_null:
-        bh_tsne_p = Popen((abspath(BH_TSNE_BIN_PATH), ), cwd=workdir,
+        bh_tsne_p = Popen(('stdbuf', '-i0', '-o0', '-e0', abspath(BH_TSNE_BIN_PATH), ), cwd=workdir,
                 # bh_tsne is very noisy on stdout, tell it to use stderr
                 #   if it is to print any output
                 stdout=stderr if verbose else dev_null)
